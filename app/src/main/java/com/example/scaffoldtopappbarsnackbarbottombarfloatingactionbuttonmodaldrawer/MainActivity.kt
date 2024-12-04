@@ -23,7 +23,9 @@ class MainActivity : ComponentActivity() {
                 //Scaffold es el esqueleto de la app
               //  ScaffoldExample()
                 //ScaffoldEjemplo2()
-                ScaffoldEjemplo3()
+                //ScaffoldEjemplo3()
+                ScaffoldEjemplo4()
+
 
             }
         }

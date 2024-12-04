@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
@@ -86,4 +87,73 @@ fun ScaffoldEjemplo3() {
         CuerpoApp(modifier = Modifier.padding(contentPadding))
     }
 
+}
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScaffoldEjemplo4() {
+
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = SnackbarHostState()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        bottomBar = { NavigationBar01() },
+        floatingActionButton = {MyFloatingActionButton()},
+        floatingActionButtonPosition = FabPosition.Center,
+
+        topBar = {
+            //   MyToopAppBar1()
+           MyToopAppBar2()
+           {
+                coroutineScope.launch {
+
+                    snackbarHostState.showSnackbar("Pulsado $it")
+
+                }
+            }
+        }
+    ) { contentPadding ->
+        // Screen content
+        CuerpoApp(modifier = Modifier.padding(contentPadding))
+    }
+
+}
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScaffoldEjemplo5() {
+
+
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = SnackbarHostState()
+    ModalDrawer(drawerState = drawerState) {
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            bottomBar = { NavigationBar01() },
+            floatingActionButton = { MyFloatingActionButton() },
+            floatingActionButtonPosition = FabPosition.Center,
+
+            topBar = {
+                //   MyToopAppBar1()
+                //MyToopAppBar2()
+                MyToopAppBar3() {
+                    coroutineScope.launch {
+
+                        snackbarHostState.showSnackbar("Pulsado $it")
+
+                    }
+                }
+            }
+        ) { contentPadding ->
+            // Screen content
+            CuerpoApp(modifier = Modifier.padding(contentPadding))
+        }
+    }
 }
