@@ -33,7 +33,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MyToopAppBar1() {
 
-    TopAppBar(modifier = Modifier.windowInsetsPadding(  // para que no ocupe la parte de arriba del movil
+    TopAppBar(modifier = Modifier.windowInsetsPadding(
+        // para que no ocupe la parte de arriba del movil
         WindowInsets.statusBars.only(WindowInsetsSides.Top)
     ),
         title = { Text("TopAppBar") },
@@ -41,7 +42,8 @@ fun MyToopAppBar1() {
             containerColor = Color.Red, // Color de fondo
             titleContentColor = Color.White // Color del título
         ),
-        navigationIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "") },
+        navigationIcon = { Icon(imageVector = Icons.Default.Person,
+            contentDescription = "") },
         actions = {
             Icon(imageVector = Icons.Default.Add, contentDescription = "")
             Icon(imageVector = Icons.Default.Call, contentDescription = "")
@@ -63,6 +65,7 @@ fun MyToopAppBar2(onClickIcon: (String) -> Unit) {
         IconButton(onClick = { onClickIcon("Ok") }) {
             Icon(
                 imageVector = Icons.Default.Done, contentDescription = ""
+
             )
         }
 
@@ -93,6 +96,7 @@ fun MyToopAppBar3(onClickIcon: (String) -> Unit) {
             titleContentColor = Color.White // Color del título
         ), navigationIcon = {
             IconButton(onClick = {
+                Log.d("Drawer", "Pulsado")
                 scope.launch {
                     if (drawerState.isClosed) drawerState.open()
                     else drawerState.close()
